@@ -36,6 +36,7 @@ module Gcore
           :authorization => Gcore::Api.authorization))    
       end
       
+      
       def self.update(params)
       
         id = params[:id]
