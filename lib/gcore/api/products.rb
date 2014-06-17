@@ -39,6 +39,8 @@ module Gcore
       
       def self.update(params)
       
+        return self.mass_update(params) if params.is_a?(Array)
+      
         id = params[:id]
         params.delete(:id)
       
@@ -48,6 +50,17 @@ module Gcore
           :accept => :json, 
           :timeout => nil, 
           :authorization => Gcore::Api.authorization))        
+      end
+      
+      def self.mass_update(params)
+
+        JSON.parse(RestClient.put("#{Gcore::Api.endpoint}/products", 
+          params.to_json, 
+          :content_type => :json, 
+          :accept => :json, 
+          :timeout => nil, 
+          :authorization => Gcore::Api.authorization))         
+      
       end
             
       def self.delete(params)

@@ -30,7 +30,29 @@ new_product =  Gcore::Api::Products.create(store_id: :plainsandprints, sku: "APP
 $stderr.puts "id:#{new_product['_id']['$oid']}  SKU:#{new_product['sku']}  Name:#{new_product['name']}"
 $stderr.puts "Quantity: #{new_product['quantity']}"
 
-$stderr.puts "\nDeleting Product..."
-new_product =  Gcore::Api::Products.delete(id: new_product['_id']['$oid'])
-$stderr.puts "id:#{new_product['_id']['$oid']}  SKU:#{new_product['sku']}  Name:#{new_product['name']}"
-$stderr.puts "Quantity: #{new_product['quantity']}"
+#$stderr.puts "\nDeleting Product..."
+#new_product =  Gcore::Api::Products.delete(id: new_product['_id']['$oid'])
+#$stderr.puts "id:#{new_product['_id']['$oid']}  SKU:#{new_product['sku']}  Name:#{new_product['name']}"
+#$stderr.puts "Quantity: #{new_product['quantity']}"
+
+
+$stderr.puts "\nMass Creation of Products..."
+new_products =  Gcore::Api::Products.create([
+  {store_id: :plainsandprints, sku: "APPRASDYPOGI",   name: "Rasdy Pogi XL",   quantity: 169},
+  {store_id: :plainsandprints, sku: "APPRASDYPANGET", name: "Rasdy Panget XL", quantity: 71}
+])
+$stderr.puts "id:#{new_products[0]['_id']['$oid']}  SKU:#{new_products[0]['sku']}  Name:#{new_products[0]['name']}"
+$stderr.puts "Quantity: #{new_products[0]['quantity']}"
+$stderr.puts "id:#{new_products[1]['_id']['$oid']}  SKU:#{new_products[1]['sku']}  Name:#{new_products[1]['name']}"
+$stderr.puts "Quantity: #{new_products[1]['quantity']}"
+
+
+$stderr.puts "\nMass Update of Products..."
+update_products =  Gcore::Api::Products.update([
+  {id: new_products[0]['_id']['$oid'] ,   quantity: 269},
+  {id: new_products[1]['_id']['$oid'], quantity: 271}
+])
+$stderr.puts "id:#{update_products[0]['_id']['$oid']}  SKU:#{update_products[0]['sku']}  Name:#{update_products[0]['name']}"
+$stderr.puts "Quantity: #{update_products[0]['quantity']}"
+$stderr.puts "id:#{update_products[1]['_id']['$oid']}  SKU:#{update_products[1]['sku']}  Name:#{update_products[1]['name']}"
+$stderr.puts "Quantity: #{update_products[1]['quantity']}"
