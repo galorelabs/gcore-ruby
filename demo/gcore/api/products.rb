@@ -7,6 +7,9 @@ Gcore::Api.setup do |setup|
   setup[:endpoint]      = "http://qa.api.gcore.galoretv.com"
 end
 
+$stderr.puts "\nGetting All Products"
+products = Gcore::Api::Products.list_all(store_id: :plainsandprints)
+$stderr.puts "Your store has #{products.length} items"
 
 $stderr.puts "\nGetting Products..."
 products =  Gcore::Api::Products.list(store_id: :plainsandprints)

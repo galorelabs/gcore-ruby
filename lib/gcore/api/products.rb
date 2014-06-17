@@ -27,6 +27,29 @@ module Gcore
           :authorization => Gcore::Api.authorization))            
       end
       
+      def self.list_all(params)
+      
+        return_value = []
+        params[:page] = 1
+        
+        loop {      
+          products = JSON.parse(RestClient.get("#{Gcore::Api.endpoint}/products", 
+            :params => params, 
+            :content_type => :json, 
+            :accept => :json, 
+            :timeout => nil, 
+            :authorization => Gcore::Api.authorization))
+            
+           break if products.length == 0
+           
+           return_value.concat(products)
+           params[:page] += 1
+        }
+        
+        return return_value   
+      
+      end      
+      
       def self.create(params)
         JSON.parse(RestClient.post("#{Gcore::Api.endpoint}/products", 
           params.to_json, 
