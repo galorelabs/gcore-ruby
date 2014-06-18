@@ -15,6 +15,7 @@ module Gcore
           :content_type => :json, 
           :accept => :json, 
           :timeout => -1, 
+          :open_timeout => -1, 
           :authorization => Gcore::Api.authorization))          
       end
       
@@ -24,6 +25,7 @@ module Gcore
           :content_type => :json, 
           :accept => :json, 
           :timeout => -1, 
+          :open_timeout => -1, 
           :authorization => Gcore::Api.authorization))            
       end
       
@@ -38,6 +40,7 @@ module Gcore
             :content_type => :json, 
             :accept => :json, 
             :timeout => -1, 
+            :open_timeout => -1, 
             :authorization => Gcore::Api.authorization))
             
            break if products.length == 0
@@ -56,6 +59,7 @@ module Gcore
           :content_type => :json, 
           :accept => :json, 
           :timeout => -1, 
+          :open_timeout => -1, 
           :authorization => Gcore::Api.authorization))    
       end
       
@@ -72,6 +76,7 @@ module Gcore
           :content_type => :json, 
           :accept => :json, 
           :timeout => -1, 
+           :open_timeout => -1,
           :authorization => Gcore::Api.authorization))        
       end
       
@@ -109,6 +114,7 @@ module Gcore
           :content_type => :json, 
           :accept => :json, 
           :timeout => -1, 
+           :open_timeout => -1,
           :authorization => Gcore::Api.authorization))          
       end
       
