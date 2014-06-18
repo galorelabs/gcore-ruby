@@ -14,7 +14,7 @@ module Gcore
           :params => params, 
           :content_type => :json, 
           :accept => :json, 
-          :timeout => nil, 
+          :timeout => -1, 
           :authorization => Gcore::Api.authorization))          
       end
       
@@ -23,7 +23,7 @@ module Gcore
           :params => params, 
           :content_type => :json, 
           :accept => :json, 
-          :timeout => nil, 
+          :timeout => -1, 
           :authorization => Gcore::Api.authorization))            
       end
       
@@ -37,7 +37,7 @@ module Gcore
             :params => params, 
             :content_type => :json, 
             :accept => :json, 
-            :timeout => nil, 
+            :timeout => -1, 
             :authorization => Gcore::Api.authorization))
             
            break if products.length == 0
@@ -55,7 +55,7 @@ module Gcore
           params.to_json, 
           :content_type => :json, 
           :accept => :json, 
-          :timeout => nil, 
+          :timeout => -1, 
           :authorization => Gcore::Api.authorization))    
       end
       
@@ -71,7 +71,7 @@ module Gcore
           params.to_json, 
           :content_type => :json, 
           :accept => :json, 
-          :timeout => nil, 
+          :timeout => -1, 
           :authorization => Gcore::Api.authorization))        
       end
       
@@ -82,13 +82,19 @@ module Gcore
         params_array = params.each_slice(slice_count).to_a
         return_value = []
 
-        params_array.each do |params_slice|
+        params_array.each_with_index do |params_slice, index|
+          $stderr.puts "Mass update - page #{index}"
+          #$stderr.puts "JSON:" + params_slice.to_json
           return_value.concat(JSON.parse(RestClient.put("#{Gcore::Api.endpoint}/products", 
             params_slice.to_json, 
             :content_type => :json, 
             :accept => :json, 
-            :timeout => nil, 
-            :authorization => Gcore::Api.authorization)))                           
+            :timeout => -1, 
+            :open_timeout => -1,
+            :authorization => Gcore::Api.authorization)))           
+            
+            
+                            
         end        
 
         return_value
@@ -102,7 +108,7 @@ module Gcore
         JSON.parse(RestClient.delete("#{Gcore::Api.endpoint}/products/#{id}", 
           :content_type => :json, 
           :accept => :json, 
-          :timeout => nil, 
+          :timeout => -1, 
           :authorization => Gcore::Api.authorization))          
       end
       
