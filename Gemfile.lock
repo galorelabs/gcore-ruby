@@ -1,0 +1,21 @@
+PATH
+  remote: .
+  specs:
+    gcore-ruby (0.1.0)
+      rest-client (~> 1.6, >= 1.6.7)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mime-types (2.3)
+    rake (0.9.6)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.6)
+  gcore-ruby!
+  rake (~> 0)

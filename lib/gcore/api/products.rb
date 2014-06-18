@@ -76,13 +76,22 @@ module Gcore
       end
       
       def self.mass_update(params)
+        
+        slice_count = 100
+        
+        params_array = params.each_slice(slice_count).to_a
+        return_value = []
 
-        JSON.parse(RestClient.put("#{Gcore::Api.endpoint}/products", 
-          params.to_json, 
-          :content_type => :json, 
-          :accept => :json, 
-          :timeout => nil, 
-          :authorization => Gcore::Api.authorization))         
+        params_array.each do |params_slice|
+          return_value.concat(JSON.parse(RestClient.put("#{Gcore::Api.endpoint}/products", 
+            params_slice.to_json, 
+            :content_type => :json, 
+            :accept => :json, 
+            :timeout => nil, 
+            :authorization => Gcore::Api.authorization)))                           
+        end        
+
+        return_value
       
       end
             
