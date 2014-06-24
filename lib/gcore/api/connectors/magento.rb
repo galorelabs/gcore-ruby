@@ -39,8 +39,32 @@ module Gcore
           
         end
         
-        def self.api_put()
-          
+        def self.api_put(params, attempts = 1)
+          begin
+            
+            store = params[:store]         
+            api   = params[:api]
+            
+            #params.delete(:store)
+            #params.delete(:api)
+            
+            JSON.parse(RestClient.put("#{Gcore::Api.endpoint}/connectors/magento/#{store}/#{api}", 
+              params[:body], 
+              :content_type => :json, 
+              :accept => :json, 
+              :timeout => -1, 
+              :open_timeout => -1,  
+              :authorization => Gcore::Api.authorization))['model']
+              
+          rescue StandardError => ex
+            if attempts <= 10
+              $stderr.puts "Gcore::Api::Connectors::Magento.api_put() failed - #{ex.message}. Trying again..." 
+              self.api_put(params, attempts + 1)
+            else
+              $stderr.puts "Gcore::Api::Connectors::Magento.api_put() Failed - #{ex.message}.. Cannot recover."
+              return [{0 => nil}]
+            end           
+          end                       
         end
         
         def self.api_delete()

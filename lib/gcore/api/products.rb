@@ -56,7 +56,7 @@ module Gcore
       def self.create(params, attempts=1)
         begin
           
-          return {} if params.blank?
+          return {} if params.nil? || params.empty?
           
           JSON.parse(RestClient.post("#{Gcore::Api.endpoint}/products", 
             params.to_json, 
