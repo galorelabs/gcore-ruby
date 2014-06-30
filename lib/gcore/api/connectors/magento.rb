@@ -11,7 +11,7 @@ module Gcore
             params[:page] = params[:page]     || 1
             
             store = params[:store]         
-            api   = params[:api]
+            api   = params[:api].to_s
             
             params.delete(:store)
             params.delete(:api)

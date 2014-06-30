@@ -59,8 +59,6 @@ module Gcore
           return {} if params.nil? || params.empty?
           
           url = "#{Gcore::Api.endpoint}/sales_orders?store_id=#{params[:store_id]}"
-          #$stderr.puts url
-          #$stderr.puts params[:body].to_json
           
           JSON.parse(RestClient.post(url, 
             params[:body].to_json, 
