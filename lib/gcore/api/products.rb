@@ -58,8 +58,8 @@ module Gcore
           
           return {} if params.nil? || params.empty?
           
-          JSON.parse(RestClient.post("#{Gcore::Api.endpoint}/products", 
-            params.to_json, 
+          JSON.parse(RestClient.post("#{Gcore::Api.endpoint}/products?store_id=#{params[:store_id]}", 
+            params[:body].to_json, 
             :content_type => :json, 
             :accept => :json, 
             :timeout => -1, 
