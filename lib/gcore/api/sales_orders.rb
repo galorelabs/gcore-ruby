@@ -60,13 +60,13 @@ module Gcore
           
           url = "#{Gcore::Api.endpoint}/sales_orders?store_id=#{params[:store_id]}"
           
-          JSON.parse(RestClient.post(url, 
+          RestClient.post(url,
             params[:body].to_json, 
             :content_type => :json, 
             :accept => :json, 
             :timeout => -1, 
             :open_timeout => -1, 
-            :authorization => Gcore::Api.authorization))     
+            :authorization => Gcore::Api.authorization)
         rescue StandardError => ex
           if attempts <= 10
             $stderr.puts "Gcore::Api::Products.create() failed - #{ex.message}. Trying again..." 
