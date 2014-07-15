@@ -19,39 +19,20 @@ module Gcore
           # :authorization => Gcore::Api.authorization))          
       end
       
-      def self.list(params)        
-        # JSON.parse(RestClient.get("#{Gcore::Api.endpoint}/products", 
-          # :params => params, 
-          # :content_type => :json, 
-          # :accept => :json, 
-          # :timeout => -1, 
-          # :open_timeout => -1, 
-          # :authorization => Gcore::Api.authorization))            
+      def self.list(params = {})
+        
+         params[:limit] = params[:limit] || Gcore::Api::LIST_LIMIT
+         params[:page] = params[:page] || 1
+                 
+         JSON.parse(RestClient.get("#{Gcore::Api.endpoint}/sales_orders", 
+           :params => params, 
+           :content_type => :json, 
+           :accept => :json, 
+           :timeout => -1, 
+           :open_timeout => -1, 
+           :authorization => Gcore::Api.authorization))            
       end
       
-      def self.list_all(params)
-      
-        # return_value = []
-        # params[:page] = 1
-#         
-        # loop {      
-          # products = JSON.parse(RestClient.get("#{Gcore::Api.endpoint}/products", 
-            # :params => params, 
-            # :content_type => :json, 
-            # :accept => :json, 
-            # :timeout => -1, 
-            # :open_timeout => -1, 
-            # :authorization => Gcore::Api.authorization))
-#             
-           # break if products.length == 0
-#            
-           # return_value.concat(products)
-           # params[:page] += 1
-        # }
-#         
-        # return return_value   
-      
-      end      
       
       def self.create(params, attempts=1)
         begin
