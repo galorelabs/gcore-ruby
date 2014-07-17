@@ -16,8 +16,9 @@ Gem::Specification.new do |spec|
     "lib/gcore/api.rb",
     "lib/gcore/api/products.rb", 
     "lib/gcore/api/sales_orders.rb",
+    "lib/gcore/api/reports.rb",
     "lib/gcore/api/connectors/magento.rb",
-    "lib/gcore/api/systems/locks.rb" 
+    "lib/gcore/api/systems/locks.rb",     
   ]
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})

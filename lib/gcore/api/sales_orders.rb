@@ -33,7 +33,7 @@ module Gcore
            :authorization => Gcore::Api.authorization))            
       end
       
-      
+      #TODO: Refactor: use 'store' instead of 'store_id'
       def self.create(params, attempts=1)
         begin
           
