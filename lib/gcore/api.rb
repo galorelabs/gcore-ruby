@@ -1,5 +1,7 @@
 module Gcore
   class Api
+    
+    LIST_LIMIT = 25
   
     @@setup = { 
       api_key: nil, 
