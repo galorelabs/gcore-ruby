@@ -132,7 +132,8 @@ module Gcore
           else
             $stderr.puts "Gcore::Api::Products.mass_update() failed - #{ex.message}. Cannot recover."
             return {}
-          end     
+          end
+        end     
       end
             
       def self.delete(params)
