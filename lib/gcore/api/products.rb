@@ -6,7 +6,7 @@ module Gcore
     class Products
     
       def self.show(params)
-      
+        
         id = params[:id]
         params.delete(:id)
       
@@ -85,12 +85,15 @@ module Gcore
       def self.update(params, attempts=1)
       
         return self.mass_update(params) if params.is_a?(Array)
-      
-        id = params[:id]
-        params.delete(:id)
+        
+        #Clone params as not to unintentionally modify it
+        local_params = params.clone
+        
+        id = local_params[:id]
+        local_params.delete(:id)
         
         endpoint = "#{Gcore::Api.endpoint}/products/#{id}"
-        body = params.to_json
+        body = local_params.to_json
         begin
           JSON.parse(RestClient.put(endpoint, 
             body, 
