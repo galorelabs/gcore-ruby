@@ -54,12 +54,14 @@ module Gcore
       end      
       
       def self.create(params, attempts=1)
-        begin
-          
+        endpoint = "#{Gcore::Api.endpoint}/products?store_id=#{params[:store_id]}"
+        body = params[:body].to_json
+        
+        begin          
           return {} if params.nil? || params.empty?
-          
-          JSON.parse(RestClient.post("#{Gcore::Api.endpoint}/products?store_id=#{params[:store_id]}", 
-            params[:body].to_json, 
+ 
+          JSON.parse(RestClient.post(endpoint, 
+            body, 
             :content_type => :json, 
             :accept => :json, 
             :timeout => -1, 
@@ -67,7 +69,10 @@ module Gcore
             :authorization => Gcore::Api.authorization))     
         rescue StandardError => ex
           if attempts <= 10
-            $stderr.puts "Gcore::Api::Products.create() failed - #{ex.message}. Trying again..." 
+            $stderr.puts "Gcore::Api::Products.create() failed - #{ex.message}. Trying again..."
+            $stderr.puts "Method: POST"
+            $stderr.puts "Endpoint: #{endpoint}"
+            $stderr.puts "Body: #{body}" 
             self.create(params, attempts + 1)
           else
             $stderr.puts "Gcore::Api::Products.create() failed - #{ex.message}. Cannot recover."
