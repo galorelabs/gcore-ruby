@@ -101,7 +101,7 @@ module Gcore
       def self.mass_update(params, attempts=1)
         
         endpoint = "#{Gcore::Api.endpoint}/products"
-        body = params_slice.to_json
+        body = ""
         
         begin
           slice_count = 100
@@ -112,6 +112,7 @@ module Gcore
           params_array.each_with_index do |params_slice, index|
             $stderr.puts "Mass update - page #{index}"
             #$stderr.puts "JSON:" + params_slice.to_json
+            body = params_slice.to_json
             return_value.concat(JSON.parse(RestClient.put(endpoint, 
               body, 
               :content_type => :json, 
