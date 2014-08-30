@@ -7,11 +7,12 @@ module Gcore
     
       def self.show(params)
         
-        id = params[:id]
-        params.delete(:id)
+        local_params = params.clone
+        id = local_params[:id]
+        local_params.delete(:id)
       
         JSON.parse(RestClient.get("#{Gcore::Api.endpoint}/products/#{id}", 
-          :params => params, 
+          :params => local_params, 
           :content_type => :json, 
           :accept => :json, 
           :timeout => -1, 
@@ -115,7 +116,9 @@ module Gcore
           end
         end                      
       end
-      
+
+=begin  
+      #Mass update is deprecated. Do the loop in the front-end.      
       def self.mass_update(params, attempts=1)
         
         endpoint = "#{Gcore::Api.endpoint}/products"
@@ -154,10 +157,11 @@ module Gcore
           end
         end     
       end
+=end
             
       def self.delete(params)
+
         id = params[:id]
-        params.delete(:id)
       
         JSON.parse(RestClient.delete("#{Gcore::Api.endpoint}/products/#{id}", 
           :content_type => :json, 
