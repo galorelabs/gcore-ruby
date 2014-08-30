@@ -70,6 +70,7 @@ module Gcore
         rescue StandardError => ex
           if attempts <= 10
             $stderr.puts "Gcore::Api::Products.create() failed - #{ex.message}. Trying again..."
+            $stderr.puts "Method: POST"
             $stderr.puts "Endpoint: #{endpoint}"
             $stderr.puts "Body: #{body}" 
             self.create(params, attempts + 1)
