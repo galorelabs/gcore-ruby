@@ -71,7 +71,7 @@ module Gcore
           if attempts <= 10
             $stderr.puts "Gcore::Api::Products.create() failed - #{ex.message}. Trying again..."
             $stderr.puts "Endpoint: #{endpoint}"
-            $stderr.puts "Parameters: #{params.to_json}" 
+            $stderr.puts "Body: #{body.to_json}" 
             self.create(params, attempts + 1)
           else
             $stderr.puts "Gcore::Api::Products.create() failed - #{ex.message}. Cannot recover."
