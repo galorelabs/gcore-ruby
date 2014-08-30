@@ -82,20 +82,35 @@ module Gcore
       end
       
       
-      def self.update(params)
+      def self.update(params, attempts=1)
       
         return self.mass_update(params) if params.is_a?(Array)
       
         id = params[:id]
         params.delete(:id)
-      
-        JSON.parse(RestClient.put("#{Gcore::Api.endpoint}/products/#{id}", 
-          params.to_json, 
-          :content_type => :json, 
-          :accept => :json, 
-          :timeout => -1, 
-           :open_timeout => -1,
-          :authorization => Gcore::Api.authorization))        
+        
+        endpoint = "#{Gcore::Api.endpoint}/products/#{id}"
+        body = params.to_json
+        begin
+          JSON.parse(RestClient.put(endpoint, 
+            body, 
+            :content_type => :json, 
+            :accept => :json, 
+            :timeout => -1, 
+             :open_timeout => -1,
+            :authorization => Gcore::Api.authorization))
+        rescue StandardError => ex
+           if attempts <= 10
+            $stderr.puts "Gcore::Api::Products.update() failed - #{ex.message}. Trying again..."
+            $stderr.puts "Method: PUT"
+            $stderr.puts "Endpoint: #{endpoint}"
+            $stderr.puts "Body: #{body}" 
+            self.update(params, attempts + 1)
+          else
+            $stderr.puts "Gcore::Api::Products.update() failed - #{ex.message}. Cannot recover."
+            return {}
+          end
+        end                      
       end
       
       def self.mass_update(params, attempts=1)
