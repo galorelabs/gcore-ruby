@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "gcore-ruby"
-  spec.version       = "0.1.0"
+  spec.version       = "0.2.0"
   spec.authors       = ["Ardee Aram", "Karlo Escota"]
   spec.email         = ["ardee.aram@galoretv.com", "karlo.escota@galoretv.com"]
   spec.summary       = %q{Ruby Wrapper for the GCore API.}
@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.files         = [
+    "lib/gcore/api_module.rb",
     "lib/gcore/api.rb",
     "lib/gcore/api/products.rb", 
     "lib/gcore/api/sales_orders.rb",
