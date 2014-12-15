@@ -49,6 +49,7 @@ If `~/.gcore/gcore.yaml` exists, it will load this file.
     sales_orders = Gcore::Api::SalesOrders.list(store_id: 'cudsly', page: 2)
     
     #Get first 25 products of Cudsly
+    require 'gcore/api/products'    
     products = Gcore::Api::Products.list(store_id: 'cudsly')
 
 ## Contributing
