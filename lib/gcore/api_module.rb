@@ -21,6 +21,7 @@ module Gcore
           @@setup.each_key do |key|
             @@setup[key] = config[key.to_s]
           end
+          puts "Endpoint: #{@@setup[:endpoint]}"
         rescue
           #Problems? Carry on. Load config in another way.
         end

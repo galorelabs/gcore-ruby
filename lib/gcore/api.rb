@@ -44,6 +44,10 @@ module Gcore
       raise "Please configure Gcore::Api first." if !@@setup[:api_key] || !@@setup[:api_secret] 
       "#{@@setup[:api_key]}:#{@@setup[:api_secret]}"
     end
+    
+    def self.header
+       {content_type: :json, accept: :json, :authorization => Gcore::Api.authorization}
+    end
   
   end
 end
