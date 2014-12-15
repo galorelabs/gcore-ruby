@@ -48,6 +48,6 @@ module Gcore
     def self.header
        {content_type: :json, accept: :json, :authorization => Gcore::Api.authorization}
     end
-  
+
   end
 end
