@@ -10,22 +10,18 @@ Add this line to your application's Gemfile:
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
-    $ gem install gcore-ruby
-
-## Usage
-
-TODO: Write usage instructions here
+    $ rake install
 
 ## Configuring
 
 GCore Ruby may be configured in two ways, in order of priority (high to low). That is, if GCore is configured with both Setup Block and YAML, the Setup Block overrides the YAML configuration.
 
 ### Setup Block
-
+    require 'gcore/api'
     Gcore::Api.setup do |setup|
         setup[:api_key] = "YOUR_API_KEY_HERE"
         setup[:api_secret] = "YOUR_API_SECRET_HERE"
@@ -41,6 +37,19 @@ If `~/.gcore/gcore.yaml` exists, it will load this file.
     api_secret: "YOUR_API_SECRET_HERE"
     endpoint: "https://api.gcore.galoretv.com"
 
+
+## Usage
+    require 'gcore/api'
+
+    #Get latest 25 orders of Store with store code 'cudsly'
+    require 'gcore/api/sales_orders'
+    sales_orders = Gcore::Api::SalesOrders.list(store_id: 'cudsly')
+    
+    #Get next 25 orders
+    sales_orders = Gcore::Api::SalesOrders.list(store_id: 'cudsly', page: 2)
+    
+    #Get first 25 products of Cudsly
+    products = Gcore::Api::Products.list(store_id: 'cudsly')
 
 ## Contributing
 
