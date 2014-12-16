@@ -15,9 +15,9 @@ module Gcore
           
           if (with_meta === true)
             response = RestClient.get(url, Gcore::Api.header)
-            return [JSON.parse(response), response.headers]
+            return [JSON.parse(response, {symbolize_names: true}), response.headers]
           else
-            return JSON.parse(RestClient.get(url, Gcore::Api.header))
+            return JSON.parse(RestClient.get(url, Gcore::Api.header), {symbolize_names: true})
           end
                      
          end      

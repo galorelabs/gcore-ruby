@@ -11,14 +11,14 @@ module Gcore
           allowed_params = [:limit, :page]
           url_params = params.select{|key, value| allowed_params.include? key} || {}           
           url = "#{Gcore::Api.endpoint}/stores/#{store_code}/sales_orders"
-          JSON.parse(RestClient.get(url, Gcore::Api.header.merge(params: url_params)))                
+          JSON.parse(RestClient.get(url, Gcore::Api.header.merge(params: url_params)), {symbolize_names: true})                
         end
         
         def self.sku_count(params = {})
           store_code = params[:store_id] || params[:store_code]
           sku = params[:sku]
           url = "#{Gcore::Api.endpoint}/stores/#{store_code}/sales_orders/sku_count/#{sku}"
-          JSON.parse(RestClient.get(url, Gcore::Api.header))  
+          JSON.parse(RestClient.get(url, Gcore::Api.header), {symbolize_names: true})  
         end
         
       end

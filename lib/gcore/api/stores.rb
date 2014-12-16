@@ -6,13 +6,13 @@ module Gcore
     class Stores
       def self.list
         url = "#{Gcore::Api.endpoint}/stores"
-        JSON.parse(RestClient.get(url, Gcore::Api.header))        
+        JSON.parse(RestClient.get(url, Gcore::Api.header), {symbolize_names: true})        
       end
       
       def self.show(params = {})
         store_code = params[:store_id] || params[:store_code] 
         url = "#{Gcore::Api.endpoint}/stores/#{store_code}"
-        JSON.parse(RestClient.get(url, Gcore::Api.header))      
+        JSON.parse(RestClient.get(url, Gcore::Api.header), {symbolize_names: true})      
       end
       
     end
