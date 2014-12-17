@@ -19,7 +19,7 @@ module Gcore
           :accept => :json, 
           :timeout => -1, 
           :open_timeout => -1, 
-          :authorization => Gcore::Api.authorization))          
+          :authorization => Gcore::Api.authorization), {symbolize_names: true})          
       end
       
       def self.list(params)        
@@ -29,7 +29,7 @@ module Gcore
           :accept => :json, 
           :timeout => -1, 
           :open_timeout => -1, 
-          :authorization => Gcore::Api.authorization))            
+          :authorization => Gcore::Api.authorization), {symbolize_names: true})            
       end
       
       def self.list_all(params)
@@ -44,7 +44,7 @@ module Gcore
             :accept => :json, 
             :timeout => -1, 
             :open_timeout => -1, 
-            :authorization => Gcore::Api.authorization))
+            :authorization => Gcore::Api.authorization), {symbolize_names: true})
             
            break if products.length == 0
            
@@ -69,7 +69,7 @@ module Gcore
             :accept => :json, 
             :timeout => -1, 
             :open_timeout => -1, 
-            :authorization => Gcore::Api.authorization))     
+            :authorization => Gcore::Api.authorization), {symbolize_names: true})     
         rescue StandardError => ex
           if attempts <= 10
             $stderr.puts "Gcore::Api::Products.create() failed - #{ex.message}. Trying again..."
@@ -104,7 +104,7 @@ module Gcore
             :accept => :json, 
             :timeout => -1, 
              :open_timeout => -1,
-            :authorization => Gcore::Api.authorization))
+            :authorization => Gcore::Api.authorization), {symbolize_names: true})
         rescue StandardError => ex
            if attempts <= 10
             $stderr.puts "Gcore::Api::Products.update() failed - #{ex.message}. Trying again..."
@@ -119,47 +119,6 @@ module Gcore
         end                      
       end
 
-=begin  
-      #Mass update is deprecated. Do the loop in the front-end.      
-      def self.mass_update(params, attempts=1)
-        
-        endpoint = "#{Gcore::Api.endpoint}/products"
-        body = ""
-        
-        begin
-          slice_count = 100
-          
-          params_array = params.each_slice(slice_count).to_a
-          return_value = []
-  
-          params_array.each_with_index do |params_slice, index|
-            $stderr.puts "Mass update - page #{index}"
-            #$stderr.puts "JSON:" + params_slice.to_json
-            body = params_slice.to_json
-            return_value.concat(JSON.parse(RestClient.put(endpoint, 
-              body, 
-              :content_type => :json, 
-              :accept => :json, 
-              :timeout => -1, 
-              :open_timeout => -1,
-              :authorization => Gcore::Api.authorization)))           
-          end          
-          return_value
-          
-        rescue StandardError => ex
-           if attempts <= 10
-            $stderr.puts "Gcore::Api::Products.mass_update() failed - #{ex.message}. Trying again..."
-            $stderr.puts "Method: PUT"
-            $stderr.puts "Endpoint: #{endpoint}"
-            $stderr.puts "Body: #{body}" 
-            self.mass_update(params, attempts + 1)
-          else
-            $stderr.puts "Gcore::Api::Products.mass_update() failed - #{ex.message}. Cannot recover."
-            return {}
-          end
-        end     
-      end
-=end
             
       def self.delete(params)
 
@@ -170,7 +129,7 @@ module Gcore
           :accept => :json, 
           :timeout => -1, 
            :open_timeout => -1,
-          :authorization => Gcore::Api.authorization))          
+          :authorization => Gcore::Api.authorization), {symbolize_names: true})          
       end
       
     end

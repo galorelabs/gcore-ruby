@@ -32,7 +32,7 @@ module Gcore
            :accept => :json, 
            :timeout => -1, 
            :open_timeout => -1, 
-           :authorization => Gcore::Api.authorization))            
+           :authorization => Gcore::Api.authorization), {symbolize_names: true})            
       end
       
       #TODO: Refactor: use 'store' instead of 'store_id'
@@ -49,7 +49,7 @@ module Gcore
             :accept => :json, 
             :timeout => -1, 
             :open_timeout => -1, 
-            :authorization => Gcore::Api.authorization))     
+            :authorization => Gcore::Api.authorization), {symbolize_names: true})     
         rescue StandardError => ex
           if attempts <= 10
             $stderr.puts "Gcore::Api::Products.create() failed - #{ex.message}. Trying again..." 
