@@ -18,7 +18,7 @@ module Gcore
               :accept => :json, 
               :timeout => -1, 
               :open_timeout => -1, 
-              :authorization => Gcore::Api.authorization))     
+              :authorization => Gcore::Api.authorization), {symbolize_names: true})     
           rescue StandardError => ex
             if attempts <= 10
               $stderr.puts "Gcore::Api::Systems.Locks.create() failed - #{ex.message}. Trying again..." 
@@ -39,7 +39,7 @@ module Gcore
               :accept => :json, 
               :timeout => -1, 
               :open_timeout => -1, 
-              :authorization => Gcore::Api.authorization))     
+              :authorization => Gcore::Api.authorization), {symbolize_names: true})     
           rescue StandardError => ex
             if attempts <= 10
               $stderr.puts "Gcore::Api::Systems.Locks.delete() failed - #{ex.message}. Trying again..." 

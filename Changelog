@@ -1,0 +1,2 @@
+=0.3.0=
+* Now uses hash with symbol keys as return values. Previously, the return values are hashes with string keys.

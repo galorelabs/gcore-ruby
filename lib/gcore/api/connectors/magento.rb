@@ -22,7 +22,7 @@ module Gcore
               :accept => :json, 
               :timeout => -1, 
               :open_timeout => -1,  
-              :authorization => Gcore::Api.authorization))['model']
+              :authorization => Gcore::Api.authorization), {symbolize_names: true})[:model]
               
           rescue StandardError => ex
             if attempts <= 10
@@ -54,7 +54,7 @@ module Gcore
               :accept => :json, 
               :timeout => -1, 
               :open_timeout => -1,  
-              :authorization => Gcore::Api.authorization))['model']
+              :authorization => Gcore::Api.authorization), {symbolize_names: true})[:model]
               
           rescue StandardError => ex
             if attempts <= 10
