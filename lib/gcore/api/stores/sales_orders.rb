@@ -1,5 +1,6 @@
 require 'json'
 require 'rest-client'
+require 'base64'
 
 module Gcore
   class Api
@@ -16,9 +17,12 @@ module Gcore
         
         def self.sku_count(params = {})
           store_code = params[:store_id] || params[:store_code]
-          sku = params[:sku]
+          
+          #Allow web unsafe SKU's
+          sku = Base64.urlsafe_encode64(params[:sku])
+          
           url = "#{Gcore::Api.endpoint}/stores/#{store_code}/sales_orders/sku_count/#{sku}"
-          JSON.parse(RestClient.get(url, Gcore::Api.header), {symbolize_names: true})  
+          JSON.parse(RestClient.get(url, Gcore::Api.header.merge(params: {is_base64: "true"})), {symbolize_names: true})  
         end
         
       end
