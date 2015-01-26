@@ -3,8 +3,6 @@ require 'gcore/api_module'
 
 module Gcore
   class Api  
-
-
     #deprecated. Use Api.list_limit
     LIST_LIMIT ||= 25
     
@@ -50,4 +48,5 @@ module Gcore
     end
 
   end
+  
 end

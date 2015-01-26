@@ -1,4 +1,3 @@
-#TODO: {symbolize_names: true} for JSON.parse
 require 'rest_client'
 require 'json'
 
