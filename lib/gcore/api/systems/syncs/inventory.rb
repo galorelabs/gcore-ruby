@@ -8,7 +8,7 @@ module Gcore
         class Inventory
 
           def self.create(params, attempts=1)
-            endpoint = "#{Gcore::Api.endpoint}/systems/syncs/inventory?store_id=#{params[:store_id]}"
+            endpoint = "#{Gcore::Api.endpoint}/systems/syncs/inventory"
             body = params[:body].to_json
 
             begin
