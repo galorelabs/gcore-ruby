@@ -3,8 +3,8 @@ require 'json'
 
 module Gcore
   class Api
-    module Systems
-      module Syncs
+    class Systems
+      class Syncs
         class Inventory
 
           def self.create(params, attempts=1)
