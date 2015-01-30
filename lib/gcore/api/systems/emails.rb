@@ -3,7 +3,7 @@ require 'json'
 
 module Gcore
   class Api
-    module Systems
+    class Systems
       class Emails
         def self.create(params, attempts=1)
           params_body = params.select{|key, value| [:to, :subject, :body].include? key}

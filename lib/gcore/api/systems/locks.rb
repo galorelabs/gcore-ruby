@@ -4,7 +4,7 @@ require 'json'
 
 module Gcore
   class Api
-    module Systems
+    class Systems
       class Locks
         
         def self.create(params, attempts=1)
