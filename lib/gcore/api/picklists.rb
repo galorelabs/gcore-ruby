@@ -39,7 +39,6 @@ module Gcore
         begin
 
           #return {} if params.nil? || params.empty?
-
           params_body = params.select{|key, value| [:sales_orders].include? key}
 
           url = "#{Gcore::Api.endpoint}/picklists"
