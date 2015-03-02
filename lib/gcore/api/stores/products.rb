@@ -28,6 +28,16 @@ module Gcore
           JSON.parse(RestClient.get(url, Gcore::Api.header.merge(params: url_params)), {symbolize_names: true})                
         end
         
+        def self.mass_update(params = {})
+            store_code = params[:store_id] || params[:store_code]
+            body = params[:body]
+            url = "#{Gcore::Api.endpoint}/stores/#{store_code}/products"
+            
+            #We are concerned with the header only
+            resp = RestClient.put(url, body.to_json, Gcore::Api.header).headers
+            output = resp.select{|key, value| [:location, :x_batch].include? key}
+        end
+        
       end
     end
   end
