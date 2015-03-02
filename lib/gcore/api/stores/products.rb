@@ -51,10 +51,12 @@ module Gcore
                     if verbose_mode
                         Gcore::Api.logger.puts(results)
                     end
+                    break if results[:x_object_processed].to_i >= results[:x_object_count].to_i
                 rescue RestClient::ResourceNotFound
                     #Carry on, loop again.
+                rescue StandardError => ex
+                    Gcore::Api.logger.puts({message: ex.message, class: ex.class.name})
                 end
-                break if results[:x_object_processed] >= results[:x_object_count]
                 sleep 1
             end
             
