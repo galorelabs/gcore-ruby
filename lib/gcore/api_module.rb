@@ -37,7 +37,8 @@ module Gcore
         api_key: nil, 
         api_secret: nil, 
         endpoint: "https://api.gcore.galoretv.com",
-        mock: false
+        mock: false,
+        logger: $stdout
       }
       end 
       

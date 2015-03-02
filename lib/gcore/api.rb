@@ -46,6 +46,15 @@ module Gcore
     def self.header
        {content_type: :json, accept: :json, :authorization => Gcore::Api.authorization}
     end
+    
+    #A logger is an object that can receive a "puts" command.
+    def self.set_logger(logger)
+        @@setup[:logger] = logger
+    end
+    
+    def self.logger
+        @@setup[:logger] || $stdout
+    end
 
   end
   
