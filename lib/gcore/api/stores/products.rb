@@ -61,7 +61,12 @@ module Gcore
             end
             
             JSON.parse(RestClient.get("#{Gcore::Api.endpoint}#{output[:location]}", Gcore::Api.header), {symbolize_names: true})  
-            
+        end
+        
+        def self.skus(params = {})
+             store_code = params[:store_id] || params[:store_code]
+             url = "#{Gcore::Api.endpoint}/stores/#{store_code}/products/skus"
+             JSON.parse(RestClient.get(url, Gcore::Api.header), {symbolize_names: true})
         end
         
       end
