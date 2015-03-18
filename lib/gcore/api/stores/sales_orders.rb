@@ -27,7 +27,7 @@ module Gcore
           url = "#{Gcore::Api.endpoint}/stores/#{store_code}/sales_orders"
           JSON.parse(RestClient.get(url, Gcore::Api.header.merge(params: url_params)), {symbolize_names: true})                
         end
-        
+
         def self.sku_count(params = {})
           store_code = params[:store_id] || params[:store_code]
           
@@ -36,6 +36,12 @@ module Gcore
           
           url = "#{Gcore::Api.endpoint}/stores/#{store_code}/sales_orders/sku_count/#{sku}"
           JSON.parse(RestClient.get(url, Gcore::Api.header.merge(params: {is_base64: "true"})), {symbolize_names: true})  
+        end
+
+        def self.list_items_summary(params = {})
+          store_code = params[:store_id] || params[:store_code]
+          url = "#{Gcore::Api.endpoint}/stores/#{store_code}/sales_orders/items_summary"
+          JSON.parse(RestClient.get(url, Gcore::Api.header.merge(params: params)), {symbolize_names: true})
         end
         
         def self.pull(params = {})
