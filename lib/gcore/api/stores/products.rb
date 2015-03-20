@@ -1,3 +1,4 @@
+require 'gcore/api'
 require 'json'
 require 'rest-client'
 require 'base64'
