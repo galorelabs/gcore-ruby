@@ -76,7 +76,7 @@ module Gcore
             verbose_mode = params[:verbose_mode]
             body = params[:body]
             url = "#{Gcore::Api.endpoint}/stores/#{store_code}/products/quantity"
-            url =+ "?delta=true" if delta
+            url += "?delta=true" if delta
             Gcore::Api.logger(url)
 
             #We are concerned with the header only
