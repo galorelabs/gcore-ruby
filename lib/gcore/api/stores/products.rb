@@ -78,7 +78,7 @@ module Gcore
             body = params[:body]
             url = "#{Gcore::Api.endpoint}/stores/#{store_code}/products/quantity"
             url += "?delta=true" if delta
-            Gcore::Api.logger.puts(url)
+            Gcore::Api.logger.puts(url) if verbose_mode
 
             #We are concerned with the header only
             resp = RestClient.put(url, body.to_json, Gcore::Api.header).headers
